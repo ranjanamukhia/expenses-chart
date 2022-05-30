@@ -1,3 +1,5 @@
+
+   
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,6 +69,19 @@
       background-color: rgb(247, 147, 41);
       border-color: rgb(247, 147, 41);
       width:30px;
+      
+    }
+
+    .day:hover{
+        background-color: aqua;
+    }
+
+    .day > #hidden-info {
+      visibility: hidden;
+    }
+    .day:hover > #hidden-info {
+      visibility: visible;
+      font-size: 10px;
     }
     .dayname{
       padding: auto;
@@ -77,6 +92,9 @@
       padding-top: 30px;
      
     }
+
+   
+    
     #day2{
       margin-top: 55px;
       padding-top: 65px;
@@ -86,7 +104,7 @@
     #day3{
       margin-top: 30px;
       padding-top: 90px;
-      background-color: rgb(110, 185, 204);
+      background-color: rgb(247, 147, 41);
     }
 
    
@@ -103,6 +121,7 @@
     #day6{
       margin-top: 40px;
       padding-top: 80px;
+     
     }
 
     #day7{
@@ -212,4 +231,36 @@
   </div>
  
 </body>
+<script type="text/javascript">
+  fetch('data.json')
+      .then(function (response) {
+          return response.json();
+      })
+      .then(function (data) {
+         
+        appendChild(data);
+
+      })
+      .catch(function (err) {
+          console.log('error: ' + err);
+      });
+
+      function appendChild(data) {
+        
+        const days = document.getElementsByClassName('day');
+      for (let i = 0; i < data.length; i++) {
+          let div = document.createElement("div");
+          div.id = "hidden-info";
+            div.innerHTML =  data[i].amount;
+         
+           days[i].appendChild(div);
+         
+
+      }
+      
+    }
+    
+  
+</script>
+
 </html>
